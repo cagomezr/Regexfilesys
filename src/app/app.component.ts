@@ -24,9 +24,12 @@ export class AppComponent implements OnInit {
 
   constructRegex(regex: string) {
     this.currentRegex = regex;
+    const exp = new RegExp(this.currentRegex)
+
     for (let i = 0; i < 6; i++) {
       if (this.boxes[i].selected) {
-        this.boxes[i].newText = regex;
+        this.boxes[i].newText.replace(exp, "1");
+        //this.boxes[i].newText = regex;
       }
     }
   }
