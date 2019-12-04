@@ -5,7 +5,7 @@
     <div class="row padding">
 
         <div class="form-group form-inline text-center" style="margin: 0 auto; width:60%">
-            <strong style="font-size: 1.5em;">Select Files By Regular Expression</strong>
+            <strong style="font-size: 1.5em;">Select Files By Regular Expression</strong> &nbsp;
             <input type="text" style="width: 35%;" (input)="constructRegex($event.target.value)"> &nbsp;
             <a href="javascript:void()"><img src="../assets/time.jpg" alt="time" height="25" width="25"> </a> &nbsp;
             <a href="javascript:void()"><img src="../assets/star.jpg" alt="time" height="25" width="25"> </a> &nbsp;
@@ -28,36 +28,15 @@
                             <th>New File Names</th>
                             <th>Current File Names</th>
                         </tr>
-                        <tr>
-                            <td><input name="box1" type="checkbox" [(ngModel)]='boxes[0]'/>&nbsp;&nbsp;&nbsp; {{box1Txt}}</td>
-                            <td>filler</td>
-                            <td>filler</td>
+                        <tr *ngFor="let box of boxes; let i = index;">
+                            <td>
+                                <input type="checkbox" [(ngModel)]='boxes[i].selected' (change)='applyRegex(i)'/>&nbsp;&nbsp;&nbsp; 
+                                {{box.originalText}}
+                            </td>
+                            <td>{{box.newText}}</td>
+                            <td>{{box.savedText}}</td>
                         </tr>
-                         <tr>
-                            <td><input name="box2" type="checkbox" [(ngModel)]='boxes[1]'/>&nbsp;&nbsp;&nbsp; {{box2Txt}}</td>
-                            <td>filler</td>
-                            <td>filler</td>
-                        </tr>
-                         <tr>
-                            <td><input name="box3" type="checkbox" [(ngModel)]='boxes[2]'/>&nbsp;&nbsp;&nbsp; {{box3Txt}}</td>
-                            <td>filler</td>
-                            <td>filler</td>
-                        </tr>
-                         <tr>
-                            <td><input name="box4" type="checkbox" [(ngModel)]='boxes[3]'/>&nbsp;&nbsp;&nbsp; {{box4Txt}}</td>
-                            <td>filler</td>
-                            <td>filler</td>
-                        </tr>
-                         <tr>
-                            <td><input name="box5" type="checkbox" [(ngModel)]='boxes[4]'/>&nbsp;&nbsp;&nbsp; {{box5Txt}}</td>
-                            <td>filler</td>
-                            <td>filler</td>
-                        </tr>
-                         <tr>
-                            <td><input name="box6" type="checkbox" [(ngModel)]='boxes[5]'/>&nbsp;&nbsp;&nbsp; {{box6Txt}}</td>
-                            <td>filler</td>
-                            <td>filler</td>
-                        </tr>
+                         
                     </table>
                 </div>
             </div>
