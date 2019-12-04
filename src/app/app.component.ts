@@ -40,6 +40,14 @@ export class AppComponent implements OnInit {
     }
   }
 
+  saveNames() {
+    for (let i = 0; i < 6; i++) {
+      if (this.boxes[i].selected) {
+        this.boxes[i].savedText = this.boxes[i].newText;
+      }
+    }
+  }
+
 }
 
 export class file {
