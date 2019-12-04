@@ -6,11 +6,10 @@
 
         <div class="form-group form-inline text-center" style="margin: 0 auto; width:60%">
             <strong style="font-size: 1.5em;">Select Files By Regular Expression</strong>
-            <input type="text" style="width: 35%;">
-            <a href="javascript:void()"><img src="../assets/time.jpg" alt="time" height="25" width="25"> </a>
-            <a href="javascript:void()"><img src="../assets/star.jpg" alt="time" height="25" width="25"> </a>
+            <input type="text" style="width: 35%;" (input)="constructRegex($event.target.value)"> &nbsp;
+            <a href="javascript:void()"><img src="../assets/time.jpg" alt="time" height="25" width="25"> </a> &nbsp;
+            <a href="javascript:void()"><img src="../assets/star.jpg" alt="time" height="25" width="25"> </a> &nbsp;
             <a href="javascript:void()"><img src="../assets/help.jpg" alt="time" height="25" width="25"></a>
-
         </div>
         
     </div>
@@ -22,16 +21,40 @@
         <div class="col-8">
             <div class="panel panel-default">
 
-
                 <div class="panel-heading">
                     <table class="tabsys" style="width:100% ;background: #FFF; border: 1px solid;">
                         <tr>
-                            <th>Old File</th>
+                            <th>Old Files</th>
                             <th>New File Names</th>
-                            <th>New File Names</th>
+                            <th>Current File Names</th>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" />&nbsp;&nbsp;&nbsp; filler</td>
+                            <td><input name="box1" type="checkbox" [(ngModel)]='boxes[0]'/>&nbsp;&nbsp;&nbsp; {{box1Txt}}</td>
+                            <td>filler</td>
+                            <td>filler</td>
+                        </tr>
+                         <tr>
+                            <td><input name="box2" type="checkbox" [(ngModel)]='boxes[1]'/>&nbsp;&nbsp;&nbsp; {{box2Txt}}</td>
+                            <td>filler</td>
+                            <td>filler</td>
+                        </tr>
+                         <tr>
+                            <td><input name="box3" type="checkbox" [(ngModel)]='boxes[2]'/>&nbsp;&nbsp;&nbsp; {{box3Txt}}</td>
+                            <td>filler</td>
+                            <td>filler</td>
+                        </tr>
+                         <tr>
+                            <td><input name="box4" type="checkbox" [(ngModel)]='boxes[3]'/>&nbsp;&nbsp;&nbsp; {{box4Txt}}</td>
+                            <td>filler</td>
+                            <td>filler</td>
+                        </tr>
+                         <tr>
+                            <td><input name="box5" type="checkbox" [(ngModel)]='boxes[4]'/>&nbsp;&nbsp;&nbsp; {{box5Txt}}</td>
+                            <td>filler</td>
+                            <td>filler</td>
+                        </tr>
+                         <tr>
+                            <td><input name="box6" type="checkbox" [(ngModel)]='boxes[5]'/>&nbsp;&nbsp;&nbsp; {{box6Txt}}</td>
                             <td>filler</td>
                             <td>filler</td>
                         </tr>
@@ -43,8 +66,6 @@
            <div class="wb">
             <strong>Additional Naming Options</strong>
             <div>
-
-
                 <div class="panel-heading">
                     <table style="width:75%;margin:0 auto">
                         <tr>
