@@ -1,9 +1,7 @@
 <div style="border:3px solid darkgray">
        <div class="row" style="background:#000; height: 20px;width: 100%;">
-        
     </div>
     <div class="row padding">
-
         <div class="form-group form-inline text-center" style="margin: 0 auto; width:60%">
             <strong style="font-size: 1.5em;">Select Files By Regular Expression</strong> &nbsp;
             <input type="text" style="width: 35%;" (input)="constructRegex($event.target.value)"> &nbsp;
@@ -11,32 +9,33 @@
             <a href="javascript:void()"><img src="../assets/star.jpg" alt="time" height="25" width="25"> </a> &nbsp;
             <a href="javascript:void()"><img src="../assets/help.jpg" alt="time" height="25" width="25"></a>
         </div>
-        
+        <div class="form-group form-inline text-center" style="margin: 0 auto; width: 60%;">&nbsp;</div>
+        <div class="form-group form-inline text-center" style="margin: 0 auto; width: 60%;">
+            <strong style="font-size: 1.5em;">Rename Selected Files With Regex</strong> &nbsp;
+            <input type="text" style="width: 35%;" (input)="applyRename($event.target.value)"> &nbsp;
+        </div>
     </div>
     <div class="row padding">
         <h3>Files Found</h3>
     </div>
     <div class="row">
-        
         <div class="col-8">
             <div class="panel panel-default">
-
                 <div class="panel-heading">
                     <table class="tabsys" style="width:100% ;background: #FFF; border: 1px solid;">
                         <tr>
                             <th>Old Files</th>
                             <th>New File Names</th>
-                            <th>Current File Names</th>
+                            <th>Additional Options Selected</th>
                         </tr>
                         <tr *ngFor="let box of boxes; let i = index;">
                             <td>
                                 <input type="checkbox" [(ngModel)]='boxes[i].selected' (change)='applyRegex(i)'/>&nbsp;&nbsp;&nbsp; 
                                 {{box.originalText}}
                             </td>
-                            <td>{{box.newText}}</td>
+                            <td contenteditable="true">{{box.newText}}</td>
                             <td>{{box.savedText}}</td>
                         </tr>
-                         
                     </table>
                 </div>
             </div>
@@ -48,7 +47,7 @@
                 <div class="panel-heading">
                     <table style="width:75%;margin:0 auto">
                         <tr>
-                            <td><input type="checkbox" /></td>
+                            <td><input type="checkbox" [(ngModel)]='OwnersNameChck'/></td>
                             <td>Owner's Name</td>
                         </tr>
                         <tr>
