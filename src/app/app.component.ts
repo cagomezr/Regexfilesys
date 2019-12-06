@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { notDeepEqual } from 'assert';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +19,8 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < 6; i++) {
       let newFile = new file();
       newFile.originalText = this.words[i];
-      //newFile.savedText = newFile.originalText;
+      newFile.savedText = newFile.originalText;
+      newFile.newText = newFile.originalText;
       newFile.selected = false;
       this.boxes.push(newFile);
     }
@@ -43,14 +43,20 @@ export class AppComponent implements OnInit {
               this.history.unshift(regex);
             }
           }else {
-            this.boxes[i].newText = ""
+            this.boxes[i].newText = this.boxes[i].originalText;
+          }
+        }
+      } else {
+        for (let i = 0; i < 6; i++) {
+          if (this.boxes[i].selected) {
+            this.boxes[i].newText = this.boxes[i].originalText;
           }
         }
       }
     } else {
       for (let i = 0; i < 6; i++) {
         if (this.boxes[i].selected) {
-          this.boxes[i].newText = "";
+          this.boxes[i].newText = this.boxes[i].originalText;
         }
       }
     }
@@ -83,7 +89,7 @@ export class AppComponent implements OnInit {
       for (let i = 0; i < 6; i++) {
         if (this.boxes[i].selected) {
           this.boxes[i].selected = false;
-          this.boxes[i].newText = "";
+          this.boxes[i].newText = this.boxes[i].originalText
         }
       }
     }
@@ -92,8 +98,6 @@ export class AppComponent implements OnInit {
   applyRegex(index: number) {
     if (this.boxes[index].selected) {
       this.boxes[index].newText = this.boxes[index].originalText;
-    }else {
-      this.boxes[index].newText = "";
     }
   }
 
@@ -111,6 +115,14 @@ export class AppComponent implements OnInit {
   addFavRegex(regex: string) {
     this.favorite.push(regex);
   }
+
+  removeFav(fav: string) {
+    let i = this.favorite.indexOf(fav, 0)
+    if (i > -1) {
+      this.favorite.splice(i, 1)
+    }
+  }
+
 }
 
 export class file {
