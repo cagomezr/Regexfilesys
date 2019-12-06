@@ -28,13 +28,13 @@
         <div class="form-group form-inline text-center" style="margin: 0 auto; width: 90%;">
             <strong style="font-size: 1.5em;">Find Regex In Selected File Name(s): </strong> &nbsp;
             <input type="text" style="width: 35%;" [(ngModel)]="renameText"> &nbsp;
-            <button class="btn btn-warning" (click)='addFavRegex(renameText)'>Add as favorite</button> &nbsp;
+            <button class="save" (click)='addFavRegex(renameText)'>&nbsp;</button> &nbsp;
         </div>
         <div class="form-group form-inline text-center" style="margin: 0 auto; width: 90%;">&nbsp;</div>
         <div class="form-group form-inline text-center" style="margin: 0 auto; width: 90%;">
             <strong style="font-size: 1.5em;">String To Use With Rename Regex: </strong> &nbsp;
             <input type="text" style="width: 35%;" (input)="newName($event.target.value)">&nbsp;
-            <button  class="btn btn-success" (click)='applyRename(renameText, newFileName)'>Apply Rename</button> &nbsp;
+            <button  class="run" (click)='applyRename(renameText, newFileName)'>&nbsp;</button> &nbsp;
         </div>
     </div>
     <div class="row padding">
