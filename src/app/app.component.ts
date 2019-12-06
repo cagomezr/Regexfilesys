@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   private boxes: file[] = [];
   private history: string[] = [];
   private favorite: string[] = [];
+  private isHidden: boolean = true;
   
   ngOnInit() {
     for (let i = 0; i < 6; i++) {
@@ -50,36 +51,33 @@ export class AppComponent implements OnInit {
             this.boxes[i].newText = "";
           }
         }
-      } else {
-        for (let i = 0; i < 6; i++) {
-          if (this.boxes[i].selected) {
+      } 
+    } else {
+      for (let i = 0; i < 6; i++) {
+        if (this.boxes[i].selected) {
+          if (newFileName.length != 0) {
+            this.boxes[i].newText = newFileName;
+          } else {
             this.boxes[i].newText = "";
           }
         }
       }
-    } else {
-      for (let i = 0; i < 6; i++) {
-        if (this.boxes[i].selected) {
-          this.boxes[i].newText = "";
-        }
-      }
     }
     for (let j = 0; j < 6; j++) {
-      if (this.boxes[j].newText ==  tempString) {
+      if (this.boxes[j].newText == tempString) {
         if (count == 0) {
           this.boxes[j].newText = this.boxes[j].newText;
           count++;
+        } else {
+          if (this.boxes[j].newText.includes('.')) {
+            var n = this.boxes[j].newText.indexOf('.', 0);
+            this.boxes[j].newText = this.boxes[j].newText.substring(0, n) + "(" + count + ")" + this.boxes[j].newText.substring(n);
+            count++;
+          } else{
+            this.boxes[j].newText += "(" + count + ")";
+            count++;
+          }  
         }
-        if (this.boxes[j].newText.includes('.')) {
-          var n = this.boxes[j].newText.indexOf('.', 0);
-          console.log(n);
-          this.boxes[j].newText = this.boxes[j].newText.substring(0, n) + "(" + count + ")" + this.boxes[j].newText.substring(n);
-          count++;
-        } else{
-          this.boxes[j].newText += "(" + count + ")";
-          count++;
-        }
-                  
       }
     }
   }
@@ -151,6 +149,9 @@ export class AppComponent implements OnInit {
 
   applyFav(fav: string) {
     this.selectText = fav
+  }
+  addOwnerName() {
+    this.isHidden = !this.isHidden;
   }
 }
 
