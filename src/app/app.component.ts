@@ -10,13 +10,21 @@ export class AppComponent implements OnInit {
   private words = ["filler", "BigPhoto.png", "desktopBackground.jpeg", "photoshopFile.psd", "gimp.exe" , "Assignmen3.doc"];
   private title = 'Assignment 3';
   private currentRegex: string = '';
+  private selectText: string = '';
   private boxes: file[] = [];
+<<<<<<< HEAD
 
+=======
+  private history: string[] = [];
+  private favorite: string[] = [];
+  
+>>>>>>> afc44a233168980ba49adc3b75d0ec4d39c5855b
   ngOnInit() {
     for (let i = 0; i < 6; i++) {
       let newFile = new file();
       newFile.originalText = this.words[i];
-      //newFile.savedText = newFile.originalText;
+      newFile.savedText = newFile.originalText;
+      newFile.newText = newFile.originalText;
       newFile.selected = false;
       this.boxes.push(newFile);
     }
@@ -24,20 +32,35 @@ export class AppComponent implements OnInit {
   // Rename Portion
   applyRename(regex: string) {
     const exp = new RegExp(regex);
+    let duplicate: boolean = false;
     if (regex) {
       if (exp) {
         for (let i = 0; i < 6; i++) {
           if (this.boxes[i].selected) {
             this.boxes[i].newText = this.boxes[i].originalText.replace(exp, this.boxes[i].originalText + " + sup");
+            for(let i = 0; i < this.history.length; i++) {
+              if(this.history[i] == regex) {
+                duplicate = true;
+              }
+            }
+            if (duplicate == false) {
+              this.history.unshift(regex);
+            }
           }else {
-            this.boxes[i].newText = ""
+            this.boxes[i].newText = this.boxes[i].originalText;
+          }
+        }
+      } else {
+        for (let i = 0; i < 6; i++) {
+          if (this.boxes[i].selected) {
+            this.boxes[i].newText = this.boxes[i].originalText;
           }
         }
       }
     } else {
       for (let i = 0; i < 6; i++) {
         if (this.boxes[i].selected) {
-          this.boxes[i].newText = "";
+          this.boxes[i].newText = this.boxes[i].originalText;
         }
       }
     }
@@ -47,11 +70,20 @@ export class AppComponent implements OnInit {
   constructRegex(regex: string) {
     this.currentRegex = regex;
     const exp = new RegExp(this.currentRegex);
+    let duplicate: boolean = false;
     if (regex) {
       if (exp) {
         for (let i = 0; i < 6; i++) {
           if (this.boxes[i].originalText.match(exp)) {
             this.boxes[i].selected = true;
+            for(let i = 0; i < this.history.length; i++) {
+              if(this.history[i] == regex) {
+                duplicate = true;
+              }
+            }
+            if (duplicate == false) {
+              this.history.unshift(regex);
+            }
           } else {
             this.boxes[i].selected = false;
           }
@@ -61,7 +93,7 @@ export class AppComponent implements OnInit {
       for (let i = 0; i < 6; i++) {
         if (this.boxes[i].selected) {
           this.boxes[i].selected = false;
-          this.boxes[i].newText = "";
+          this.boxes[i].newText = this.boxes[i].originalText
         }
       }
     }
@@ -70,8 +102,6 @@ export class AppComponent implements OnInit {
   applyRegex(index: number) {
     if (this.boxes[index].selected) {
       this.boxes[index].newText = this.boxes[index].originalText;
-    }else {
-      this.boxes[index].newText = "";
     }
   }
 
@@ -84,6 +114,23 @@ export class AppComponent implements OnInit {
       }
     }
   }
+
+  // Add regex to favorite list
+  addFavRegex(regex: string) {
+    this.favorite.push(regex);
+  }
+
+  removeFav(fav: string) {
+    let i = this.favorite.indexOf(fav, 0)
+    if (i > -1) {
+      this.favorite.splice(i, 1)
+    }
+  }
+
+  applyFav(fav: string) {
+    this.selectText = fav
+  }
+
 }
 
 export class file {

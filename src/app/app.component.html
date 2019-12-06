@@ -2,17 +2,37 @@
        <div class="row" style="background:#000; height: 20px;width: 100%;">
     </div>
     <div class="row padding">
-        <div class="form-group form-inline text-center" style="margin: 0 auto; width:60%">
+        <div class="form-group form-inline text-center" style="margin: 0 auto; width:90%">
             <strong style="font-size: 1.5em;">Select Files By Regular Expression</strong> &nbsp;
-            <input type="text" style="width: 35%;" (input)="constructRegex($event.target.value)"> &nbsp;
-            <a href="javascript:void()"><img src="../assets/time.jpg" alt="time" height="25" width="25"> </a> &nbsp;
-            <a href="javascript:void()"><img src="../assets/star.jpg" alt="time" height="25" width="25"> </a> &nbsp;
+            <input type="text" style="width: 35%;" [(ngModel)]="selectText"> &nbsp;
+            <button  class="btn btn-success" (click)='constructRegex(selectText)'>Apply Regex</button>
+            <button class="btn btn-warning" (click)='addFavRegex(selectText)'>Add as favorite</button> &nbsp;
+            <div ngbDropdown>
+                <a ngbDropdownToggle id="history" role="button"><img src="../assets/time.jpg" alt="time" height="25" width="25"> </a> &nbsp;
+                <div ngbDropdownMenu aria-labelledby="history" class="dropdown-menu">
+                    <a ngbDropdownItem  *ngFor="let regex of history">{{regex}}</a>
+                </div>
+            </div>
+
+
+
+            <div ngbDropdown>
+                <a ngbDropdownToggle id="favorites" role="button"><img src="../assets/star.jpg" alt="time" height="25" width="25"> </a> &nbsp;
+                <div ngbDropdownMenu aria-labelledby="favorites" class="dropdown-menu">
+                    <a role='button' (click)='applyFav(fav)' ngbDropdownItem *ngFor="let fav of favorite">
+                        {{fav}} &nbsp; 
+                        <a role='button' style="float: right;" (click)="removeFav(fav)"><strong>x</strong></a>
+                    </a>
+                </div>
+            </div>
             <a href="javascript:void()"><img src="../assets/help.jpg" alt="time" height="25" width="25"></a>
         </div>
-        <div class="form-group form-inline text-center" style="margin: 0 auto; width: 60%;">&nbsp;</div>
-        <div class="form-group form-inline text-center" style="margin: 0 auto; width: 60%;">
+        <div class="form-group form-inline text-center" style="margin: 0 auto; width: 90%;">&nbsp;</div>
+        <div class="form-group form-inline text-center" style="margin: 0 auto; width: 90%;">
             <strong style="font-size: 1.5em;">Rename Selected Files With Regex</strong> &nbsp;
-            <input type="text" style="width: 35%;" (input)="applyRename($event.target.value)"> &nbsp;
+            <input type="text" style="width: 35%;" [(ngModel)]="renameText"> &nbsp;
+            <button  class="btn btn-success" (click)='applyRename(renameText)'>Apply Regex</button> &nbsp;
+            <button class="btn btn-warning" (click)='addFavRegex(renameText)'>Add as favorite</button> &nbsp;
         </div>
     </div>
     <div class="row padding">
@@ -127,8 +147,8 @@
     </div>
     <div class="row finalpanel">
         <div style="float: right; width:97.5%;">
-            <button class="btn btn-warning">Select Another Folder</button>
-            <button class="btn btn-danger">Undo</button>
+            <button class="btn btn-warning" disabled>Select Another Folder</button>
+            <button class="btn btn-danger" disabled>Undo</button>
             <button  class="btn btn-success" (click)='saveNames()'>Save</button>
         </div>
     </div>
