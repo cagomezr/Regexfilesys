@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,7 @@ export class AppComponent implements OnInit {
   private title = 'Assignment 3';
   private currentRegex: string = '';
   private boxes: file[] = [];
-  
+
   ngOnInit() {
     for (let i = 0; i < 6; i++) {
       let newFile = new file();
