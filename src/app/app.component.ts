@@ -12,32 +12,28 @@ export class AppComponent implements OnInit {
   private currentRegex: string = '';
   private selectText: string = '';
   private boxes: file[] = [];
-<<<<<<< HEAD
-
-=======
   private history: string[] = [];
   private favorite: string[] = [];
   
->>>>>>> afc44a233168980ba49adc3b75d0ec4d39c5855b
   ngOnInit() {
     for (let i = 0; i < 6; i++) {
       let newFile = new file();
       newFile.originalText = this.words[i];
-      newFile.savedText = newFile.originalText;
-      newFile.newText = newFile.originalText;
+      newFile.savedText = "";
+      newFile.newText = "";
       newFile.selected = false;
       this.boxes.push(newFile);
     }
   }
   // Rename Portion
-  applyRename(regex: string) {
+  applyRename(regex: string, newFileName: string) {
     const exp = new RegExp(regex);
     let duplicate: boolean = false;
     if (regex) {
-      if (exp) {
+      if (exp) { 
         for (let i = 0; i < 6; i++) {
           if (this.boxes[i].selected) {
-            this.boxes[i].newText = this.boxes[i].originalText.replace(exp, this.boxes[i].originalText + " + sup");
+            this.boxes[i].newText = this.boxes[i].originalText.replace(exp, newFileName);
             for(let i = 0; i < this.history.length; i++) {
               if(this.history[i] == regex) {
                 duplicate = true;
@@ -47,7 +43,7 @@ export class AppComponent implements OnInit {
               this.history.unshift(regex);
             }
           }else {
-            this.boxes[i].newText = this.boxes[i].originalText;
+            this.boxes[i].newText = "";
           }
         }
       } else {
@@ -101,7 +97,7 @@ export class AppComponent implements OnInit {
   
   applyRegex(index: number) {
     if (this.boxes[index].selected) {
-      this.boxes[index].newText = this.boxes[index].originalText;
+      this.boxes[index].newText = "";
     }
   }
 
@@ -130,7 +126,6 @@ export class AppComponent implements OnInit {
   applyFav(fav: string) {
     this.selectText = fav
   }
-
 }
 
 export class file {
