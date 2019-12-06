@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { notDeepEqual } from 'assert';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,8 @@ export class AppComponent implements OnInit {
   private title = 'Assignment 3';
   private currentRegex: string = '';
   private boxes: file[] = [];
+  private history: string[] = [];
+  private favorite: string[] = [];
   
   ngOnInit() {
     for (let i = 0; i < 6; i++) {
@@ -25,11 +28,20 @@ export class AppComponent implements OnInit {
   // Rename Portion
   applyRename(regex: string) {
     const exp = new RegExp(regex);
+    let duplicate: boolean = false;
     if (regex) {
       if (exp) {
         for (let i = 0; i < 6; i++) {
           if (this.boxes[i].selected) {
             this.boxes[i].newText = this.boxes[i].originalText.replace(exp, this.boxes[i].originalText + " + sup");
+            for(let i = 0; i < this.history.length; i++) {
+              if(this.history[i] == regex) {
+                duplicate = true;
+              }
+            }
+            if (duplicate == false) {
+              this.history.unshift(regex);
+            }
           }else {
             this.boxes[i].newText = ""
           }
@@ -48,11 +60,20 @@ export class AppComponent implements OnInit {
   constructRegex(regex: string) {
     this.currentRegex = regex;
     const exp = new RegExp(this.currentRegex);
+    let duplicate: boolean = false;
     if (regex) {
       if (exp) {
         for (let i = 0; i < 6; i++) {
           if (this.boxes[i].originalText.match(exp)) {
             this.boxes[i].selected = true;
+            for(let i = 0; i < this.history.length; i++) {
+              if(this.history[i] == regex) {
+                duplicate = true;
+              }
+            }
+            if (duplicate == false) {
+              this.history.unshift(regex);
+            }
           } else {
             this.boxes[i].selected = false;
           }
@@ -84,6 +105,11 @@ export class AppComponent implements OnInit {
         this.boxes[i].savedText =  this.boxes[i].newText;
       }
     }
+  }
+
+  // Add regex to favorite list
+  addFavRegex(regex: string) {
+    this.favorite.push(regex);
   }
 }
 
