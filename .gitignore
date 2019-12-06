@@ -45,3 +45,5 @@ testem.log
 .DS_Store
 Thumbs.db
 src/app/test.html
+src/assets/play-32.png
+src/assets/Paomedia-Small-N-Flat-Floppy.ico

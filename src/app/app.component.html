@@ -5,8 +5,8 @@
         <div class="form-group form-inline text-center" style="margin: 0 auto; width:90%">
             <strong style="font-size: 1.5em;">Select Files By Regular Expression:</strong> &nbsp;
             <input type="text" style="width: 35%;" [(ngModel)]="selectText"> &nbsp;
-            <button  class="btn btn-success" (click)='constructRegex(selectText)'>Apply Regex</button>
-            <button class="btn btn-warning" (click)='addFavRegex(selectText)'>Add as favorite</button> &nbsp;
+            <button  class="run" (click)='constructRegex(selectText)'>&nbsp;</button>
+            <button class="save" (click)='addFavRegex(selectText)'>&nbsp;</button> &nbsp;
             <div ngbDropdown>
                 <a ngbDropdownToggle id="history" role="button"><img src="../assets/time.jpg" alt="time" height="25" width="25"> </a> &nbsp;
                 <div ngbDropdownMenu aria-labelledby="history" class="dropdown-menu">
