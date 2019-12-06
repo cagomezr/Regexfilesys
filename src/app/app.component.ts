@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   private words = ["filler", "BigPhoto.png", "desktopBackground.jpeg", "photoshopFile.psd", "gimp.exe" , "Assignmen3.doc"];
   private title = 'Assignment 3';
   private currentRegex: string = '';
+  private selectText: string = '';
   private boxes: file[] = [];
   private history: string[] = [];
   private favorite: string[] = [];
@@ -121,6 +122,10 @@ export class AppComponent implements OnInit {
     if (i > -1) {
       this.favorite.splice(i, 1)
     }
+  }
+
+  applyFav(fav: string) {
+    this.selectText = fav
   }
 
 }

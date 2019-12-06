@@ -19,7 +19,7 @@
             <div ngbDropdown>
                 <a ngbDropdownToggle id="favorites" role="button"><img src="../assets/star.jpg" alt="time" height="25" width="25"> </a> &nbsp;
                 <div ngbDropdownMenu aria-labelledby="favorites" class="dropdown-menu">
-                    <a ngbDropdownItem *ngFor="let fav of favorite">
+                    <a role='button' (click)='applyFav(fav)' ngbDropdownItem *ngFor="let fav of favorite">
                         {{fav}} &nbsp; 
                         <a role='button' style="float: right;" (click)="removeFav(fav)"><strong>x</strong></a>
                     </a>
