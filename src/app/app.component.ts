@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   private title = 'Assignment 3';
   private currentRegex: string = '';
   private selectText: string = '';
+  private newFileName: string;
   private boxes: file[] = [];
   private history: string[] = [];
   private favorite: string[] = [];
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < 6; i++) {
       let newFile = new file();
       newFile.originalText = this.words[i];
-      newFile.savedText = "";
+      newFile.savedText = newFile.originalText;
       newFile.newText = "";
       newFile.selected = false;
       this.boxes.push(newFile);
@@ -49,14 +50,14 @@ export class AppComponent implements OnInit {
       } else {
         for (let i = 0; i < 6; i++) {
           if (this.boxes[i].selected) {
-            this.boxes[i].newText = this.boxes[i].originalText;
+            this.boxes[i].newText = "";
           }
         }
       }
     } else {
       for (let i = 0; i < 6; i++) {
         if (this.boxes[i].selected) {
-          this.boxes[i].newText = this.boxes[i].originalText;
+          this.boxes[i].newText = "";
         }
       }
     }
@@ -109,6 +110,10 @@ export class AppComponent implements OnInit {
         this.boxes[i].savedText =  this.boxes[i].newText;
       }
     }
+  }
+
+  newName(value: string) {
+    this.newFileName = value;
   }
 
   // Add regex to favorite list
